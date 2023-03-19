@@ -1,5 +1,5 @@
 import React from 'react';
-import {CarType, StudentType} from './App';
+import {CarType, StudentType} from '../App';
 
 type NewComponentPropsType = {
     students: StudentType[],
