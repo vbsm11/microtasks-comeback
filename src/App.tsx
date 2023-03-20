@@ -7,6 +7,7 @@ import {NewComponent} from './components/NewComponent';
 import {Button} from './components/Button';
 import {FilterComponent} from './components/FilterComponent';
 import {FullInput} from './components/FullInput';
+import {Input} from './components/Input';
 
 export type StudentType = {
     id: number,
@@ -120,8 +121,11 @@ function App() {
         {message: 'message3'},
     ])
 
-    const addMessage = (text: string) => {
-        setMessage([{message: text}, ...message])
+    const [value, setValue] = useState('')
+
+    const addMessage = () => {
+        setMessage([{message: value}, ...message])
+        setValue('')
     }
 
     return (
@@ -145,7 +149,10 @@ function App() {
 
             {/*<FilterComponent currentMoney={currentMoney} onClickHandler={onclickFilterHandler}/>*/}
 
-            <FullInput callBack={addMessage}/>
+            {/*<FullInput callBack={addMessage}/>*/}
+
+            <Input value={value} callBack={setValue}/>
+            <Button name={'+'} callBack={addMessage}/>
             {message.map((m, index) => {
                 return (
                     <div key={index}>{m.message}</div>
