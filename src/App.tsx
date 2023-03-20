@@ -6,6 +6,7 @@ import {Footer} from './site/Footer';
 import {NewComponent} from './components/NewComponent';
 import {Button} from './components/Button';
 import {FilterComponent} from './components/FilterComponent';
+import {FullInput} from './components/FullInput';
 
 export type StudentType = {
     id: number,
@@ -86,31 +87,41 @@ function App() {
 
 
 
-    const [money, setMoney] = useState<MoneyType[]>([
-        {banknots: 'Dollars', value: 100, number: ' a1234567890'},
-        {banknots: 'Dollars', value: 50, number: ' z1234567890'},
-        {banknots: 'RUBLS', value: 100, number: ' w1234567890'},
-        {banknots: 'Dollars', value: 100, number: ' e1234567890'},
-        {banknots: 'Dollars', value: 50, number: ' c1234567890'},
-        {banknots: 'RUBLS', value: 100, number: ' r1234567890'},
-        {banknots: 'Dollars', value: 50, number: ' x1234567890'},
-        {banknots: 'RUBLS', value: 50, number: ' v1234567890'},
+    // const [money, setMoney] = useState<MoneyType[]>([
+    //     {banknots: 'Dollars', value: 100, number: ' a1234567890'},
+    //     {banknots: 'Dollars', value: 50, number: ' z1234567890'},
+    //     {banknots: 'RUBLS', value: 100, number: ' w1234567890'},
+    //     {banknots: 'Dollars', value: 100, number: ' e1234567890'},
+    //     {banknots: 'Dollars', value: 50, number: ' c1234567890'},
+    //     {banknots: 'RUBLS', value: 100, number: ' r1234567890'},
+    //     {banknots: 'Dollars', value: 50, number: ' x1234567890'},
+    //     {banknots: 'RUBLS', value: 50, number: ' v1234567890'},
+    // ])
+    //
+    //
+    // const [filter, setFilter] = useState<FilterType>('all')
+    //
+    // let currentMoney: MoneyType[] = []
+    //
+    // if (filter === 'all') {
+    //     currentMoney = money
+    // }
+    // else if (filter === 'RUBLS' || 'Dollars') {
+    //     currentMoney = money.filter(m => m.banknots === filter)
+    // }
+    //
+    // const onclickFilterHandler = (filter: FilterType) => {
+    //     setFilter(filter)
+    // }
+
+    let [message, setMessage] = useState([
+        {message: 'message1'},
+        {message: 'message2'},
+        {message: 'message3'},
     ])
 
-
-    const [filter, setFilter] = useState<FilterType>('all')
-
-    let currentMoney: MoneyType[] = []
-
-    if (filter === 'all') {
-        currentMoney = money
-    }
-    else if (filter === 'RUBLS' || 'Dollars') {
-        currentMoney = money.filter(m => m.banknots === filter)
-    }
-
-    const onclickFilterHandler = (filter: FilterType) => {
-        setFilter(filter)
+    const addMessage = (text: string) => {
+        setMessage([{message: text}, ...message])
     }
 
     return (
@@ -132,7 +143,14 @@ function App() {
             {/*<button onClick={onClickHandler1}>number</button>*/}
             {/*<button onClick={onClickHandler2}>0</button>*/}
 
-            <FilterComponent currentMoney={currentMoney} onClickHandler={onclickFilterHandler}/>
+            {/*<FilterComponent currentMoney={currentMoney} onClickHandler={onclickFilterHandler}/>*/}
+
+            <FullInput callBack={addMessage}/>
+            {message.map((m, index) => {
+                return (
+                    <div key={index}>{m.message}</div>
+                )
+            })}
         </div>
     );
 }
