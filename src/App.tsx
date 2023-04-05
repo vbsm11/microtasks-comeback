@@ -12,6 +12,7 @@ export type TodolistsType = {
 }
 
 function App() {
+    // BLL:
 
     let todolistID1 = v1();
     let todolistID2 = v1();
@@ -67,6 +68,23 @@ function App() {
         })
     }
 
+    // UI:
+
+    const todolistsForRender = todolists.map(tl => {
+
+        return (
+            <Todolist
+                key={tl.id}
+                todolistID={tl.id}
+                title={tl.title}
+                tasks={tasks[tl.id]}
+                filter={tl.filter}
+                removeTask={removeTask}
+                addTask={addTask}
+                changeTaskStatus={changeStatus}
+                changeFilter={changeFilter}
+        )
+    })
 
     let tasksForTodolist = tasks;
 
@@ -84,14 +102,7 @@ function App() {
 
     return (
         <div className="App">
-            <Todolist title="What to learn"
-                      tasks={tasksForTodolist}
-                      removeTask={removeTask}
-                      changeFilter={changeFilter}
-                      addTask={addTask}
-                      changeTaskStatus={changeStatus}
-                      filter={filter}
-            />
+            {todolistsForRender}
         </div>
     );
 }
