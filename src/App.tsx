@@ -49,6 +49,7 @@ function App() {
 
     function addTask(todolistID: string, title: string) {
         setTasks({
+            ...tasks,
             [todolistID]: [
                 {
                     id: v1(),
@@ -56,8 +57,7 @@ function App() {
                     isDone: false
                 },
                 ...tasks[todolistID]
-            ],
-            ...tasks
+            ]
         })
     }
 
@@ -74,10 +74,10 @@ function App() {
         let tasksForTodolist = tasks[tl.id];
 
         if (tl.filter === 'active') {
-            tasksForTodolist = tasks[tl.id].filter(t => t.isDone === false);
+            tasksForTodolist = tasks[tl.id].filter(t => !t.isDone);
         }
         if (tl.filter === 'completed') {
-            tasksForTodolist = tasks[tl.id].filter(t => t.isDone === true);
+            tasksForTodolist = tasks[tl.id].filter(t => t.isDone);
         }
 
         return (
